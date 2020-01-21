@@ -28,6 +28,51 @@ data[3:10] ##only print from 3 to 9
 #data conditional selection
 data[data['Number of speakers']<5000] #isolate the portion of
 
+df=pd.DataFrame(data)
+df
+
+df.drop(df.index[0], inplace = True) #remove the 1st row, row at index0
+df
+
+#remove the 1st two rows
+df.drop(df.index[:2], inplace=True)
+df
+
+#remove the specific columns name
+df.drop(['Latitude'],axis=1, inplace=True)
+df
+
+#subsetting and indexing
+df=data[2:] #selecting all entries from index 2 onward
+
+data[::2] #selecting entries at even index locations
+df=data.iloc[0:8,0:7] #secify the ranges of rows and ocolumns iloc[rowslicing, colslcing]
+df
+
+#select all columns for rows of index val 0 and 10
+data.loc[[0,10],:]
+
+#isolate rows and cols
+data[['Countries','Name in English','Latitude']][4:9]
+
+#subset data on the basis of row labels
+data.head(4)
+data[data.Countries=="Italy"] # isolate by row's value(s)
+x=data.loc[data['Countries'].isin(['Italy','Germany'])]
+x
+
+data[(data.Countries=='India') & (data['Degree of endangerment'] == 'Vulnerable')]
+
+df=data[:] #make a copy of data
+df.rename(columns={'Number of speakers':'Number'}, inplace =True) # replace Nuber of Speakers with "Number"
+df.head(5)
+df.iloc[0:,5:]
+
+#get all the entries where countries are India and language speak less than 100 person
+df[(df.Countries=='India') & (df.Number<100)] 
+
+#same condition above but only take the last 2 entries and with 5 columns
+df[(df.Countries=='India') & (df.Number<100)].iloc[-2:,0:6] #
 
 ### S4: READ CSV, EXCEL, HTML AND JSON DATA TO PYTHON USING PANDA
 
